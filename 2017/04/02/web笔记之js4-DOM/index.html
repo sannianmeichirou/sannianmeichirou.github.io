@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="js," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="DOM节点相关操作:NodeType:节点类型有12种（常见的有 元素节点1、文本节点3、属性节点2）； childNodes：（子节点集合）              IE678只包含元素，其他包含文本和元素（包括非标准元素）；              可以用 .length得到长度； children：（只包含元素节点，推荐使用）； firstChild：（第一个子节点）IE678只会是元素">
+<meta name="keywords" content="js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="web笔记之js4 DOM">
+<meta property="og:url" content="http://sannianmeichirou.github.io/2017/04/02/web笔记之js4-DOM/index.html">
+<meta property="og:site_name" content="OuO ..yanghaoyu~noob coder">
+<meta property="og:description" content="DOM节点相关操作:NodeType:节点类型有12种（常见的有 元素节点1、文本节点3、属性节点2）； childNodes：（子节点集合）              IE678只包含元素，其他包含文本和元素（包括非标准元素）；              可以用 .length得到长度； children：（只包含元素节点，推荐使用）； firstChild：（第一个子节点）IE678只会是元素">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-08-23T09:16:47.246Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="web笔记之js4 DOM">
+<meta name="twitter:description" content="DOM节点相关操作:NodeType:节点类型有12种（常见的有 元素节点1、文本节点3、属性节点2）； childNodes：（子节点集合）              IE678只包含元素，其他包含文本和元素（包括非标准元素）；              可以用 .length得到长度； children：（只包含元素节点，推荐使用）； firstChild：（第一个子节点）IE678只会是元素">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.2',
+    sidebar: {"position":"right","display":"post","offset":12,"offset_float":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://sannianmeichirou.github.io/2017/04/02/web笔记之js4-DOM/"/>
+
+
+
+
+
+  <title>web笔记之js4 DOM | OuO ..yanghaoyu~noob coder</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">OuO ..yanghaoyu~noob coder</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://sannianmeichirou.github.io/2017/04/02/web笔记之js4-DOM/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yhy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="OuO ..yanghaoyu~noob coder">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">web笔记之js4 DOM</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-02T11:05:59+08:00">
+                2017-04-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web笔记js/" itemprop="url" rel="index">
+                    <span itemprop="name">web笔记js</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="DOM节点相关操作"><a href="#DOM节点相关操作" class="headerlink" title="DOM节点相关操作:"></a>DOM节点相关操作:</h2><pre><code>NodeType:节点类型有12种（常见的有 元素节点1、文本节点3、属性节点2）；
+childNodes：（子节点集合）
+             IE678只包含元素，其他包含文本和元素（包括非标准元素）；
+             可以用 .length得到长度；
+children：（只包含元素节点，推荐使用）；
+firstChild：（第一个子节点）IE678只会是元素，其他可能是文本或元素；
+firstElementChild：IE678没有这个属性，其他第一个元素节点；
+lastChild / lastElementChild : （最后一个子节点）；
+nextSibling / nextElementSibling：(下一个节点);
+previousSibling / previousElementSibling：（上一个节点）；
+parentNode：（元素的父节点）
+offsetParent：（元素有定位属性的父节点）
+offsetLeft / offsetTop
+</code></pre><hr>
+<h2 id="js里删除节点和创造节点"><a href="#js里删除节点和创造节点" class="headerlink" title="js里删除节点和创造节点"></a>js里删除节点和创造节点</h2><pre><code>删除元素节点 .removeChild()：  //删除子节点
+例：oDiv.parentNode.removeChild( oDiv ); 注（js里只能删除子节点，删除节点前必须找到父节点）
+创建元素节点 .appendChild();
+例：var obj = document.createElement(&apos;div&apos;); //createElement 创建节点
+    oDiv.appendChild( obj )                // appendChild 将创建的节点放入oDiv中
+</code></pre><hr>
+<h2 id="js中的高度属性-和页面可视高度-页面滚动高度"><a href="#js中的高度属性-和页面可视高度-页面滚动高度" class="headerlink" title="js中的高度属性 和页面可视高度 页面滚动高度"></a>js中的高度属性 和页面可视高度 页面滚动高度</h2><pre><code>关于宽高的一些属性：
+  clientHeight / clientWidth     （width + padding）
+  offsetHeight / offsetWidth     （width + padding + border）
+  crollHeight / scrollWidth       (实际内容高度/宽度，有滚动条时会比client大/没有滚动或者隐藏时与client一样打)
+页面可视区宽高：
+  document.documentElement.clientWidth   // height；
+滚动距离宽高：
+  document.body.scrollTop    只适用于chrome浏览器
+  document.documentElement.scrollTop 适用于其他浏览器    
+滚动高度兼容：
+  document.onclick = function(){
+    var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    alert( scrollTop );
+  };    
+</code></pre><hr>
+<h2 id="js中-表单"><a href="#js中-表单" class="headerlink" title="js中  表单"></a>js中  表单</h2><pre><code>xx.value       表示表单的值
+input的name   在获取节点时可以document.getElementsByName()
+               同时在form里面，可以直接 .(name名) 去获取元素节点 例如 oForm 是form元素 aa是input的name 则可以直接oForm.aa
+checked：          用于radio（单选） 和checkbox      
+                选项选中则    xx.checked = true 不选中则为false
+                xx.checked 可以设置值 
+               xx.checked=&apos;1&apos;或者   
+               xx.checked=function(){};
+                 都表示true 但属性为自定义属性 
+                 要用removeAttribute(&apos;checked&apos;)去除和getAttribute(&apos;checked&apos;)获取值；
+                 注！ input 的name可以相同  但是一般情况下只在type = &quot;radio&quot; 时用相同的name 其他type均不用    
+.focus()：      获得焦点
+.onfocus        获取焦点事件 当获得焦点时触发 
+.blur();          失去焦点  
+                  注！.onfocus .onblur 事件必须是在能有焦点的元素才能触发
+.onblur        失去焦点事件  当失去焦点时触发     例如input a标签 一些按TAB键能切换锁定的可以 一般div不行（写了事件也不触发） 
+.onchange      内容改变事件 当内容改变的时候触发：
+               (内容)text  :  失去焦点时，如何和得到焦点是的value不一样，就触发
+               (单选)radio :  点击自己改变自己选中状态时才触发
+              （多选）checkbox : 点击自己改变自己选中状态时就触发
+              （选择列表））select : 改变option时触发
+</code></pre><hr>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/js/" rel="tag"># js</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/29/web笔记之js3字符串-数组/" rel="next" title="web笔记之js3字符串 数组">
+                <i class="fa fa-chevron-left"></i> web笔记之js3字符串 数组
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/03/web笔记之js5-BOM/" rel="prev" title="web笔记之js5 BOM">
+                web笔记之js5 BOM <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/1.png"
+               alt="yhy" />
+          <p class="site-author-name" itemprop="name">yhy</p>
+           
+              <p class="site-description motion-element" itemprop="description">just...coding life</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/">
+            
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#DOM节点相关操作"><span class="nav-number">1.</span> <span class="nav-text">DOM节点相关操作:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#js里删除节点和创造节点"><span class="nav-number">2.</span> <span class="nav-text">js里删除节点和创造节点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#js中的高度属性-和页面可视高度-页面滚动高度"><span class="nav-number">3.</span> <span class="nav-text">js中的高度属性 和页面可视高度 页面滚动高度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#js中-表单"><span class="nav-number">4.</span> <span class="nav-text">js中  表单</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yhy</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.2</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/three/three.min.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

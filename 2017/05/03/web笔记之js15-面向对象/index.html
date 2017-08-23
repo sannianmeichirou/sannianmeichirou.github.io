@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="js," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="面向对象面向过程： 流程式的写法  面向对象： 所有的程序执行都从对象出发  对象拥有属性和方法          1.所有的功能都从对象出发，已达到一个对象实现某种功能的效果         2.面向对象支持扩展（继承）     在函数执行前面加上new：                 1.函数内部自然会产生一个对象，this指向这个对象                 2.函数默认返回产生的">
+<meta name="keywords" content="js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="web笔记之js15 面向对象">
+<meta property="og:url" content="http://sannianmeichirou.github.io/2017/05/03/web笔记之js15-面向对象/index.html">
+<meta property="og:site_name" content="OuO ..yanghaoyu~noob coder">
+<meta property="og:description" content="面向对象面向过程： 流程式的写法  面向对象： 所有的程序执行都从对象出发  对象拥有属性和方法          1.所有的功能都从对象出发，已达到一个对象实现某种功能的效果         2.面向对象支持扩展（继承）     在函数执行前面加上new：                 1.函数内部自然会产生一个对象，this指向这个对象                 2.函数默认返回产生的">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-08-23T09:20:51.103Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="web笔记之js15 面向对象">
+<meta name="twitter:description" content="面向对象面向过程： 流程式的写法  面向对象： 所有的程序执行都从对象出发  对象拥有属性和方法          1.所有的功能都从对象出发，已达到一个对象实现某种功能的效果         2.面向对象支持扩展（继承）     在函数执行前面加上new：                 1.函数内部自然会产生一个对象，this指向这个对象                 2.函数默认返回产生的">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.2',
+    sidebar: {"position":"right","display":"post","offset":12,"offset_float":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://sannianmeichirou.github.io/2017/05/03/web笔记之js15-面向对象/"/>
+
+
+
+
+
+  <title>web笔记之js15 面向对象 | OuO ..yanghaoyu~noob coder</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">OuO ..yanghaoyu~noob coder</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://sannianmeichirou.github.io/2017/05/03/web笔记之js15-面向对象/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yhy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="OuO ..yanghaoyu~noob coder">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">web笔记之js15 面向对象</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-03T12:13:12+08:00">
+                2017-05-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web笔记js/" itemprop="url" rel="index">
+                    <span itemprop="name">web笔记js</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h2><pre><code>面向过程： 流程式的写法
+
+面向对象： 所有的程序执行都从对象出发
+
+对象拥有属性和方法
+
+        1.所有的功能都从对象出发，已达到一个对象实现某种功能的效果
+        2.面向对象支持扩展（继承）    
+在函数执行前面加上new：
+                1.函数内部自然会产生一个对象，this指向这个对象
+                2.函数默认返回产生的这个对象
+    function Person(name){            function Person(name){
+        this.name = name;            var obj = {};
+    };                   与        obj.name = name;
+    var a = new Person(&apos;123&apos;);            return obj;
+                            };
+                        var a = Person(123);
+                意思差不多  不过new内部产生的this指向obj    
+</code></pre><h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数:"></a>构造函数:</h3><pre><code>面向对象所写的函数function 构造函数名的头字母一般都是大写
+        function Person( name ){
+            this.name = name;
+            this.showName = function(){
+                alert( this.name );
+            };
+        };
+
+        var obj1 = new Person( &apos;onmyway&apos; );
+        var obj2 = new Person( &apos;左缺&apos; );
+
+        alert( obj1.showName == obj2.showName );
+            结果为false
+</code></pre><h3 id="原型：-prototype"><a href="#原型：-prototype" class="headerlink" title="原型： prototype"></a>原型： prototype</h3><pre><code>只有构造函数有原型
+原型的方法里面的this指向的是执行的时候的对象                
+    在写面向对象的时候：
+        私有属性写在构造函数里面
+        公共属性写在prototype里面
+
+function Person( name ){
+    this.name = name;
+};
+Person.prototype.showName = function(){
+    alert( this.name );
+};
+
+var obj1 = new Person( &apos;onmyway&apos; );
+var obj2 = new Person( &apos;左缺&apos; );
+
+alert( obj2.showName == obj1.showName )
+        结果为true  公有属性在原型里所用的内存地址是相同的
+</code></pre><h3 id="方法链："><a href="#方法链：" class="headerlink" title="方法链："></a>方法链：</h3><pre><code>$(&apos;#wrap&apos;).css({}).click().animate()
+像jquery一样  可以连点方法
+    function Person(name , age){
+        this.name = name;
+        this.age = age;
+    };
+
+    Person.prototype.showName = function(){
+        console.log( this.name );
+        return this;
+    };
+    Person.prototype.showAge = function(){
+        console.log( this.age );
+        return this;
+    };
+
+    var p1 = new Person( &apos;阿飞&apos; , &apos;27&apos; );
+
+    p1.showName().showAge();
+在原函数下加入return this 然后showName() return后this仍然指的是p1
+所有 p1.showName() 就是 p1 就可以继续.showAge()
+</code></pre><h3 id="包装对象："><a href="#包装对象：" class="headerlink" title="包装对象："></a>包装对象：</h3><pre><code>// 数组： Array
+    var arr = [1,2,3];
+
+    Array.prototype.push = function(){
+        var argu = arguments;
+        for ( var i=0;i&lt;argu.length;i++ )
+        {
+            this[this.length] = argu[i];
+        }
+    };
+
+    arr.push(4,8,9);
+
+    alert( arr );
+     js中 push 方法的真实样子 即每个js对象 其实是由面向对象产生的
+// 对于非对象的数据类型，是由包装对象产生的
+例：字符串
+    var str = &apos;qwer&apos;;
+    alert( str.charAt(2) );  //e
+str为字符串 charAt(2)表示查找字符串第3个字符的方法        
+按道理 str为字符串不是对象 是不能 .方法的  只有对象才能 .方法    
+但确实有 这是为什么
+因为包装对象
+    js中存在 String.prototype.charAt()
+    这说明在使用 str.charAt() 的时候产生了一个面向对象 
+    而这个面向对象的构造函数便是String 
+    String的原型有charAt方法 所以str可以试用.charAt
+    但是    这个str产生的面向对象与正常的面向对象不同
+    它产出的对象this 在产生之后就会删掉
+例     
+    var str = &apos;qwer&apos;;
+    str.number = 10;
+    alert( str.number );  //undefind
+   按道理 str是字符串不是对象 不能.属性的
+         但结果是undefind而不是语法错误 
+   就是因为 str 的包装对象
+   str.number 产生了一个面向对象 (其实是包装对象）
+   但是这个对象马上就被删掉了 
+   它的构造函数String里面没有number属性 原型里面也没有number方法
+   所以 显示结果为undefined
+</code></pre><h3 id="原型链-：proto"><a href="#原型链-：proto" class="headerlink" title="原型链 ：proto"></a>原型链 ：<strong>proto</strong></h3><pre><code>   对象和它的构造函数原型的关系
+例1    function A(argu){
+        this.number = argu;
+    };
+
+    A.prototype.number = 10;
+
+    var objA = new A( 5 );
+
+    alert( objA.number );  // 5
+        如果 对象本身有属性 那么以本身属性为准
+    如果对象没有 属性那么以原型属性为准    
+
+例2
+    function A(argu){
+        //this.number = argu;
+    };
+
+    Object.prototype.number = 20;
+
+    //A.prototype.number = 10;
+
+    var objA = new A( 5 );
+
+    alert( objA.number ); // 20
+  A.prototype 本身自己就是一个对象  因为可以.属性和.方法
+  那么A.prototype 肯定就有一个构造函数（假设是B） 和 原型 因为对象都是由面向对象产生的
+  那么B.prototype 也是一个对象 也有一个构造函数 和 原型
+          .......  有很多
+  最终的 对象 也就是最后最根本的那个对象  在js中就是Object
+  所以 如果A本身没有 number属性 A的原型A.prototype也没有number属性
+          就会一级一级往上找  最终找到Object 
+  所以在这里定义了 Object.prototype.number = 20
+  所以objA.number 也是20
+</code></pre><h3 id="对象原型里面默认的属性和方法："><a href="#对象原型里面默认的属性和方法：" class="headerlink" title="对象原型里面默认的属性和方法："></a>对象原型里面默认的属性和方法：</h3><pre><code>具体看js 26课 04
+  constructor : 
+          属性，值是构造函数；
+          (当一个new一个对象的时候，原型里面默认带有很多属性和函数的 并且不可以for in)
+  instanceof : (  对象1  instanceof  构造函数1 ) 
+          判断 对象1 的构造函数是不是 构造函数1 ；
+
+
+  hasOwnProperty(  );
+          是不是对象私有的属性；返回布尔值；    
+</code></pre><h3 id="继承："><a href="#继承：" class="headerlink" title="继承："></a>继承：</h3><pre><code>    儿子继承爸爸；
+    儿子可以用爸爸的方法和属性；
+    儿子的改变不影响爸爸；
+function Person( name , age , marry , sex ){
+            this.name = name;
+            this.age = age;
+            this.marry = marry;
+            this.sex = sex;
+        };
+
+        Person.prototype.showName = function(){
+            alert( this.name );
+        };
+
+
+        // 通过继承创造一个子函数
+        function PersonChild(  pArr , weight ){
+            Person.apply( this , pArr );
+            this.weight = weight;
+        };    
+var oP = new PersonChild( [&apos;abc&apos; , &apos;18&apos; , false , 1] , 60 );
+
+    注：    这里用Person.apply( this , pArr );这个方法 让PersonChild函数继承了Person 函数的属性
+</code></pre><h2 id="继承原型函数-两种方法"><a href="#继承原型函数-两种方法" class="headerlink" title="继承原型函数  两种方法"></a>继承原型函数  两种方法</h2><h3 id="1-递归-："><a href="#1-递归-：" class="headerlink" title="1 递归 ："></a>1 递归 ：</h3><pre><code>类似阶乘 ！ 例如： 4！= 4*3！ 
+                = 4*3*2！
+                = 4*3*2*1
+var a = factorial( 4 );
+    alert( a );
+
+    function factorial( num ){
+        if ( num == 1 )
+        {
+            return 1;
+        }
+        return num * factorial(num-1);
+    }            
+   1:f（4）.return 4*f(3)   2:f(3).return 3*f(2)    3:f(2).return 2*f(1)    4:f(1).return 1
+   先递：  4*f(3)  3*f(2) 2*f(1) f(1)
+   后归：  先第4步return 1 给 第3步 的f(1) 计算出2*f(1)    然后将结果return给f(2) 计算出第二步的结果 再ruturn给第一步计算 
+       最后得到4*f(3)
+
+用递归得到的克隆构造函数：
+
+    function Clone( obj ){
+        for ( var key in obj )
+        {
+            this[key] = (typeof obj[key]==&apos;object&apos;)?new Clone( obj[key] ):obj[key];
+        };
+    如何使用 得到继承原型:
+        PersonChild.prototype = new Clone(Person.prototype);
+</code></pre><h3 id="2-利用面向对象时-创造对象的特点-进行继承"><a href="#2-利用面向对象时-创造对象的特点-进行继承" class="headerlink" title="2  利用面向对象时 创造对象的特点 进行继承"></a>2  利用面向对象时 创造对象的特点 进行继承</h3><pre><code>例： function P(){};
+     P.prototype.aaa = function(){};    
+     var a = new P();
+a对象 可以得到 P.prototype的所有属性 即 a.aaa 成立
+    同时 a的改变 不影响 P.prototype  即a.b = x ;与P.prototype 无关
+
+function inherit( obj ){
+    function Fn(){};
+    Fn.prototype = obj;
+    return new Fn();
+}        
+PersonChild.prototype = inherit(Person.prototype);
+</code></pre><hr>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/js/" rel="tag"># js</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/27/web笔记之js14-jsonp/" rel="next" title="web笔记之js14 jsonp">
+                <i class="fa fa-chevron-left"></i> web笔记之js14 jsonp
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/23/web笔记之js小本本/" rel="prev" title="web笔记之小本本">
+                web笔记之小本本 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/1.png"
+               alt="yhy" />
+          <p class="site-author-name" itemprop="name">yhy</p>
+           
+              <p class="site-description motion-element" itemprop="description">just...coding life</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/">
+            
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#面向对象"><span class="nav-number">1.</span> <span class="nav-text">面向对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#构造函数"><span class="nav-number">1.1.</span> <span class="nav-text">构造函数:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原型：-prototype"><span class="nav-number">1.2.</span> <span class="nav-text">原型： prototype</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法链："><span class="nav-number">1.3.</span> <span class="nav-text">方法链：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#包装对象："><span class="nav-number">1.4.</span> <span class="nav-text">包装对象：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原型链-：proto"><span class="nav-number">1.5.</span> <span class="nav-text">原型链 ：proto</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对象原型里面默认的属性和方法："><span class="nav-number">1.6.</span> <span class="nav-text">对象原型里面默认的属性和方法：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#继承："><span class="nav-number">1.7.</span> <span class="nav-text">继承：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#继承原型函数-两种方法"><span class="nav-number">2.</span> <span class="nav-text">继承原型函数  两种方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-递归-："><span class="nav-number">2.1.</span> <span class="nav-text">1 递归 ：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-利用面向对象时-创造对象的特点-进行继承"><span class="nav-number">2.2.</span> <span class="nav-text">2  利用面向对象时 创造对象的特点 进行继承</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yhy</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.2</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/three/three.min.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

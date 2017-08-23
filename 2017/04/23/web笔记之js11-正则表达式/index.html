@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="js," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="js中的正则表达式一个匹配规则 （用来检测字符串满不满足这个规则的东西） 规则定义 ###：    var reg = /qwe/;                 /匹配规则/                       var reg = new RegExp(&amp;apos;qwe&amp;apos;);     new RegExp（&amp;apos;匹配规则&amp;apos;）   reg.test()   检">
+<meta name="keywords" content="js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="web笔记之js11 正则表达式">
+<meta property="og:url" content="http://sannianmeichirou.github.io/2017/04/23/web笔记之js11-正则表达式/index.html">
+<meta property="og:site_name" content="OuO ..yanghaoyu~noob coder">
+<meta property="og:description" content="js中的正则表达式一个匹配规则 （用来检测字符串满不满足这个规则的东西） 规则定义 ###：    var reg = /qwe/;                 /匹配规则/                       var reg = new RegExp(&amp;apos;qwe&amp;apos;);     new RegExp（&amp;apos;匹配规则&amp;apos;）   reg.test()   检">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-08-23T09:19:47.998Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="web笔记之js11 正则表达式">
+<meta name="twitter:description" content="js中的正则表达式一个匹配规则 （用来检测字符串满不满足这个规则的东西） 规则定义 ###：    var reg = /qwe/;                 /匹配规则/                       var reg = new RegExp(&amp;apos;qwe&amp;apos;);     new RegExp（&amp;apos;匹配规则&amp;apos;）   reg.test()   检">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.2',
+    sidebar: {"position":"right","display":"post","offset":12,"offset_float":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://sannianmeichirou.github.io/2017/04/23/web笔记之js11-正则表达式/"/>
+
+
+
+
+
+  <title>web笔记之js11 正则表达式 | OuO ..yanghaoyu~noob coder</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">OuO ..yanghaoyu~noob coder</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://sannianmeichirou.github.io/2017/04/23/web笔记之js11-正则表达式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yhy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/1.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="OuO ..yanghaoyu~noob coder">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">web笔记之js11 正则表达式</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-23T16:09:14+08:00">
+                2017-04-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web笔记js/" itemprop="url" rel="index">
+                    <span itemprop="name">web笔记js</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="js中的正则表达式"><a href="#js中的正则表达式" class="headerlink" title="js中的正则表达式"></a>js中的正则表达式</h2><pre><code>一个匹配规则 （用来检测字符串满不满足这个规则的东西）
+</code></pre><h3 id="规则定义-："><a href="#规则定义-：" class="headerlink" title="规则定义 ###："></a>规则定义 ###：</h3><pre><code>    var reg = /qwe/;                 /匹配规则/                  
+    var reg = new RegExp(&apos;qwe&apos;);     new RegExp（&apos;匹配规则&apos;）  
+reg.test()   检测是否满足规则，如果满足规则，返回true，否则返回false
+str.match()  满足匹配规则，把匹配成功的内容放到一个数组里面返回数组，否则返回null    
+例：
+       var reg = /qwe/;       匹配‘qwe’字符串
+       var str = &apos;qweaaaaa&apos;;
+       alert ( reg.test(str) );    //true        
+       alert ( str.match(reg) );  // [qwe]                
+</code></pre><h3 id="转义"><a href="#转义" class="headerlink" title="转义 \"></a>转义 \</h3><pre><code>    \s 单个空格            \S  非空格          均指的单个
+    \d 单个数字            \D  非数字        
+    \w  字符（字母 数字 _）     \W  非字符
+    \b  独立部分（空格 开始 结束 -）\B  非独立部分 
+    \跟上特殊意义的字符  正则里面的特殊字符 \ / { } + . ? * ( ) [ ] ^ $   \加上特殊符号  相当于匹配这些特殊符号
+    \r 换行        \n 回车      \t 制表符相当于按一次tab
+例：
+       var reg = /\d/;  匹配单个数字        var reg = /\//;     匹配特殊符号/
+       var str = &apos;qb2ca1&apos;;                var str = &apos;qb2/ca1&apos;;
+       alert( str.match( reg ) );  //[2]        alert( str.match( reg ) );  //[/]
+</code></pre><h3 id="量词："><a href="#量词：" class="headerlink" title="量词：{}"></a>量词：{}</h3><pre><code>        {1,5}     :  1 &lt;= n &lt;= 5     1个到5个之间
+    +    表示{1,} :  n &gt;= 1    一个及以上    
+    *    表示{0,} :  n &gt;= 0    零个及以上
+    ?    表示{0,1}:  0 &lt;= n &lt;= 1 零个或者一个
+例：
+       var reg = /w+/;  匹配一个以上的w
+       var str = &apos;qqqwwwadqqw&apos;;    
+       alert( str.match( reg ) );  //[www]
+
+
+标识：    /条件/标识  标识写在结尾/后面 
+    g   :   全局匹配 （从头到尾匹配完）  没有g则一次匹配成功后结束 有g则全局匹配成功后结束
+    i   :   不区分大小写
+例：    
+    var reg = /w+/gi;    全局匹配一个及以上的w 且不区分大小写 
+    var str = &apos;qqqwwWadqqw&apos;;
+    alert( str.match( reg ) );  //[wwW,w]
+</code></pre><h3 id="子集："><a href="#子集：" class="headerlink" title="子集： ()"></a>子集： ()</h3><pre><code>    ()内为子集内容 匹配时子集作为整体匹配    注意！当有子项，并且没有全局标识的时候，match返回的数组的第二项代表子集内容
+例：
+    var reg = /(qw)+(ss)/;        //匹配子项1 (qw) 匹配子项2 (ss)        
+    var str = &apos;qwqwssqqwsqwqwqwss&apos;;
+    alert( str.match( reg ) );     //[qwqw,ss,qw,ss] 后面的qw,ss 为返还的子集内容
+</code></pre><h3 id="字符集："><a href="#字符集：" class="headerlink" title="字符集： [ ]"></a>字符集： [ ]</h3><pre><code>    [0-9]  ： 从0到9    [1-5]  :  从1到5        
+    [a-z]  :  a - z        [f-k]  :  f - k
+    [A-Z]  :  A - Z
+    []里内容为其他字符时候 表示或者
+    字符集里面的 除了转义\  其他的 特殊字符 不特殊  是单纯的没有意义的字符            
+例：
+    var reg = /[(+q/{\de1,5}w)]/g;   全局匹配 （或者+或者q或者/或者{ 或者 单个数字 或者e或者1或者，或者5....
+    var str = &apos;(q+d{wdeq/w3fds\\&apos;;
+    alert( str.match( reg ) );     // [(,q,+,{,w,e,q,/,w,3]
+</code></pre><h3 id="其他小知识点综合"><a href="#其他小知识点综合" class="headerlink" title="其他小知识点综合:"></a>其他小知识点综合:</h3><pre><code>.   任意字符    .+表示所有均可匹配
+^   开始   在字符集[]里面使用是  非
+$   结束
+var reg = /^qww/;    匹配以q为字符串开头并且后面跟着ww 
+var str = &apos;qwwerqwweqqw&apos;;    
+alert( str.match( reg ) ); // [qww]
+或者： []单个字符的或者
+    |  或者  写在外面  多个字符或者
+例：var reg = /qqq|www/; 表示qqq或者www
+    var reg = /qqq(aa)|www/; 表示 qqq(aa) 一个整体 或者www
+    var reg = /aa(qqq|www)/;  表示aa  和 子集qqq 或者 子集www        
+replace  str.replace( reg , strA );     把匹配成功的东西替换成strA;
+strA : 可以是一个字符串，也可以是一个匿名并且带return的函数
+       当是函数的时候：
+              可以接收形参
+              return 什么 替换成什么
+    function( 形参1 , 形参2 , 形参3  , …… ){
+    return xxxx;};
+    形参1 表示匹配成功完整规则项（若有或者 则是哪项成功表示哪项 如果全局匹配则是匹配多次 表示多次运行function每次形参1都不同）
+        形参2 表示规则第1个子集项                                  形参1总是表示匹配成功的规则整体
+    形参3 表示规则第2个子集项....
+例：
+    var reg = /qq(w)|qq/g;
+    var str = &apos;werqqwweqqr&apos;;
+    var b = str.replace( reg , &apos;bb&apos; );        // b: &apos;werbbwebbr&apos;
+    var a = str.replace( reg , function(q1 ,q2){
+        console.log(&apos;q1&apos;+&apos;:&apos;+q1);    出现两次console 第一次 q1:qqw q2:w    
+        console.log(&apos;q2&apos;+&apos;:&apos;+q2);            第二次 q1:qq  q2:undefined 
+        return &apos;123&apos;;                
+    });                    // a:&apos;wer123we123r&apos;    
+</code></pre><h3 id="QQ号的规则："><a href="#QQ号的规则：" class="headerlink" title="QQ号的规则："></a>QQ号的规则：</h3><pre><code>   只能是数字
+   长度 ： 5  10
+   不能以0开头            
+var regQQ = /^[1-9]\d{4,9}$/;
+</code></pre><h3 id="邮箱的规则：-xxx-xx-xxx-xx"><a href="#邮箱的规则：-xxx-xx-xxx-xx" class="headerlink" title="邮箱的规则： xxx@xx.xxx.xx"></a>邮箱的规则： xxx@xx.xxx.xx</h3><pre><code>var regMail = /^\w+@[0-9a-zA-Z]{2,}(\.[a-zA-Z]{2,}){1,2}$/;
+   以多位字符开头 @ 2位以上的数字或者字母或者组合 一个或者两个子集（ . 加上 2位以上的字母的共同组合 ）
+</code></pre><h3 id="手机号码："><a href="#手机号码：" class="headerlink" title="手机号码："></a>手机号码：</h3><pre><code>var regTel = /^1[34578]\d{9}$/;    
+</code></pre><h3 id="身份证："><a href="#身份证：" class="headerlink" title="身份证："></a>身份证：</h3><pre><code>      var regID = /^[1-9]\d{16}[0-9xX]$/;
+
+例：  输入框中 输入邮箱完成 失去光标焦点 后的提示
+oTxt.onblur = function(){
+    var val = this.value;
+    if ( val.length )
+    {    
+        if ( regMail.test( val ) )
+        {
+            alert( &apos;OK&apos; );
+        }
+        else
+        {
+            alert( &apos;您输入的邮箱不满足要求&apos; );
+        }                    
+    };
+};
+</code></pre><h3 id="屏蔽骂人词汇："><a href="#屏蔽骂人词汇：" class="headerlink" title="屏蔽骂人词汇："></a>屏蔽骂人词汇：</h3><pre><code>var str = &apos;你妈的你个垃    圾&apos;;            
+var reg = /傻.*逼|垃.*圾|S.*B|他.*妈.*的|你.*妈.*的|shabi/gi;
+var newStr = str.replace( reg , function( $0 ){
+    var str = &apos;&apos;;
+    for (var i=0;i&lt;$0.length;i++ )
+    {
+        str += &apos;*&apos;;
+    }
+        return str;
+    });
+    alert( newStr );
+</code></pre><hr>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/js/" rel="tag"># js</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/17/web笔记之js10-默认事件/" rel="next" title="web笔记之js10 默认事件">
+                <i class="fa fa-chevron-left"></i> web笔记之js10 默认事件
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/23/web笔记之js12-闭包/" rel="prev" title="web笔记之js12 闭包">
+                web笔记之js12 闭包 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/1.png"
+               alt="yhy" />
+          <p class="site-author-name" itemprop="name">yhy</p>
+           
+              <p class="site-description motion-element" itemprop="description">just...coding life</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/">
+            
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#js中的正则表达式"><span class="nav-number">1.</span> <span class="nav-text">js中的正则表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#规则定义-："><span class="nav-number">1.1.</span> <span class="nav-text">规则定义 ###：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#转义"><span class="nav-number">1.2.</span> <span class="nav-text">转义 \</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#量词："><span class="nav-number">1.3.</span> <span class="nav-text">量词：{}</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#子集："><span class="nav-number">1.4.</span> <span class="nav-text">子集： ()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符集："><span class="nav-number">1.5.</span> <span class="nav-text">字符集： [ ]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他小知识点综合"><span class="nav-number">1.6.</span> <span class="nav-text">其他小知识点综合:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#QQ号的规则："><span class="nav-number">1.7.</span> <span class="nav-text">QQ号的规则：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#邮箱的规则：-xxx-xx-xxx-xx"><span class="nav-number">1.8.</span> <span class="nav-text">邮箱的规则： xxx@xx.xxx.xx</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#手机号码："><span class="nav-number">1.9.</span> <span class="nav-text">手机号码：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#身份证："><span class="nav-number">1.10.</span> <span class="nav-text">身份证：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#屏蔽骂人词汇："><span class="nav-number">1.11.</span> <span class="nav-text">屏蔽骂人词汇：</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yhy</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.2</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/three/three.min.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
